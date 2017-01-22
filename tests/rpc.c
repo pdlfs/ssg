@@ -135,7 +135,6 @@ static hg_return_t shutdown_post_forward(const struct hg_cb_info *cb_info)
         DEBUG("%d: sending shutdown response\n", rank);
         hret = HG_Respond(resp_handle, &shutdown_post_respond, NULL, NULL);
         assert(hret == HG_SUCCESS);
-        return HG_SUCCESS;
     }
     else {
         c->shutdown_flag = 1;
@@ -177,7 +176,7 @@ hg_return_t shutdown_rpc_handler(hg_handle_t h)
     }
     else {
         hg_handle_t next_handle;
-        na_addr_t next_addr;
+        hg_addr_t next_addr;
 
         next_addr = ssg_get_addr(c->s, rank);
         assert(next_addr != NULL);
